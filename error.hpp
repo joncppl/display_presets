@@ -32,11 +32,11 @@ constexpr const char* error_string(LONG err)
   return "UNKNOWN";
 }
 
-#define GUARD_MAIN( real_main_ ) \
+#define GUARD_MAIN( main_func_ ) \
 static int exception_guarded_main(int argc, char* argv[]) \
 {                                \
   try {                          \
-    return real_main(argc, argv);\
+    return (main_func_) (argc, argv);                     \
   } catch (const std::exception& e) {                     \
     std::cerr << e.what() << '\n';                        \
     return 1;                    \
